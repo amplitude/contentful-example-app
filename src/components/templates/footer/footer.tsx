@@ -14,9 +14,6 @@ export const Footer = () => {
       borderTop="1px"
       borderColor={theme.f36.gray200}>
       <Container>
-        <Text mb={8}>{t('common.aboutUs')}</Text>
-        <Text>{t('common.description1')}</Text>
-        <Text mb={8}>{t('common.description2')}</Text>
         <Text variant="small">
           {t('common.poweredBy')}{' '}
           <Link href="https://contentful.com" isExternal color={theme.f36.blue500}>

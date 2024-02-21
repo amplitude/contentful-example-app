@@ -42,6 +42,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, preview }
 
     const page = data.pageLandingCollection?.items[0];
 
+    console.log("page", page);
+
     if (!page) {
       return {
         notFound: true,
@@ -52,9 +54,11 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, preview }
       props: {
         ...(await getServerSideTranslations(locale)),
         page,
+        // page: { ...page, resolvedHeroBanner: resolvedVariant },
       },
     };
-  } catch {
+  } catch (err) {
+    console.log(err);
     return {
       notFound: true,
     };

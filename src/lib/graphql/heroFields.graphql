@@ -1,0 +1,22 @@
+fragment HeroFields on Hero {
+  __typename
+  sys {
+    id
+    spaceId
+  }
+  preHeadline
+  headline
+  image {
+    ...ImageFields
+  }
+  cta
+  description
+}
+
+query hero($headline: String!, $locale: String, $preview: Boolean) {
+  heroCollection(limit: 1, where: { headline: $headline }, locale: $locale, preview: $preview) {
+    items {
+      ...HeroFields
+    }
+  }
+}

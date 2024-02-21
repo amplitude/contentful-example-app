@@ -1,135 +1,95 @@
-import { Flex, Heading, Box, Grid, Container } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Heading, Button, Text } from '@chakra-ui/react';
 import { useContentfulInspectorMode } from '@contentful/live-preview/react';
 import styled from '@emotion/styled';
-import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 
-import { CtfImage } from '@src/components/features/contentful/ctf-image/CtfImage';
-import { HEADER_HEIGHT } from '@src/components/templates/header';
-import { PageLandingFieldsFragment } from '@src/lib/__generated/sdk';
+import { CtfImage } from '../contentful/ctf-image';
 
-const StyledBox = styled(Box)`
+import { ExperimentContext } from '@src/components/shared/ExperimentProvider';
+import { experiment } from '@src/components/templates/layout';
+import { Nav } from '@src/components/templates/nav';
+import { Hero, PageLandingFieldsFragment } from '@src/lib/__generated/sdk';
+
+const StyledGridItem = styled(GridItem)`
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top center;
+    object-position: center center;
+    max-height: 60vh;
   }
 `;
 
 export const HeroBanner = ({
   // Tutorial: contentful-and-the-starter-template.md
   // Uncomment the line below to make the Greeting field available to render
-  // greeting,
-  heroBannerHeadline,
-  heroBannerHeadlineColor,
-  heroBannerImage,
+  heroBanner,
   sys: { id: entryId },
 }: PageLandingFieldsFragment) => {
-  const router = useRouter();
   const inspectorProps = useContentfulInspectorMode({ entryId });
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const headingRef = useRef<HTMLHeadingElement | null>(null);
-
-  const [headingVisible, setHeadingVisible] = useState(false);
+  const { demoExperimentMode, experimentVariant } = useContext(ExperimentContext);
+  const [hero, setHero] = useState<Hero | null>(null);
 
   useEffect(() => {
-    const handleFontSize = () => {
-      window.requestAnimationFrame(() => {
-        if (containerRef.current && headingRef.current) {
-          headingRef.current.style.display = 'inline-block'; // In order to calculate the ratio for our font scaling, it needs to be inline, so it doesn't grab the full width of its parent.
+    const matchExperimentData = async () => {
+      const userId = demoExperimentMode
+        ? experimentVariant === 'control'
+          ? 'heather.lee@amplitude.com'
+          : 'anotheruser@amplitude.com'
+        : 'heather.lee@amplitude.com';
 
-          // Retrieve the width of both the container and the heading element
-          const { width: containerWidth } = containerRef.current.getBoundingClientRect();
-          const { width: headingWidth } = headingRef.current.getBoundingClientRect();
-
-          // Retrieve some computed styles, that will be used to accurately remove any additional padding, margin and other layout altering properties from the container width
-          const headingComputedStyle = window.getComputedStyle(headingRef.current, null);
-          const headingFontSize = headingComputedStyle.getPropertyValue('font-size');
-          const headingLetterSpacing = headingComputedStyle.getPropertyValue('letter-spacing');
-
-          const containerComputedStyle = window.getComputedStyle(containerRef.current, null);
-
-          // Calculate the amount of pixels that need to be deducted from the raw container width
-          const containerWidthFluff =
-            parseInt(containerComputedStyle.paddingLeft, 10) +
-            parseInt(containerComputedStyle.paddingRight, 10) +
-            Math.abs(parseInt(headingLetterSpacing, 10));
-
-          // Calculate the font-size based on its base times the scaling ratio
-          headingRef.current.style.fontSize = `calc(${headingFontSize} * ${
-            (containerWidth - containerWidthFluff) / headingWidth
-          })`;
-
-          setHeadingVisible(true);
-        }
+      await experiment.fetch({
+        user_id: userId,
       });
+
+      const variant = experiment.variant(heroBanner?.experimentId ?? 'control');
+      let resolvedVariant;
+      if (heroBanner && variant.value) {
+        const variation = heroBanner.meta[variant.value];
+        resolvedVariant = heroBanner.variationsCollection?.items.find(hero => {
+          return hero?.__typename === 'Hero' && hero?.sys.id === variation;
+        });
+        setHero(resolvedVariant);
+      }
     };
-
-    handleFontSize(); // Runs the method once on init, and a second time after changing visibility so the heading size is corrected after initial calculation as a safeguard
-
-    router.events.on('routeChangeComplete', handleFontSize);
-    window.addEventListener('resize', handleFontSize);
-
-    return () => {
-      window.removeEventListener('resize', handleFontSize);
-      router.events.off('routeChangeComplete', handleFontSize);
-    };
-  }, [headingVisible, router.events, router.query]);
+    matchExperimentData();
+  }, [heroBanner, demoExperimentMode, experimentVariant]);
 
   return (
     <Grid
       position="relative"
-      gridRow={2}
+      gridRow={3}
       gridColumn={1}
-      mt={`-${HEADER_HEIGHT}px`}
+      templateAreas={`"header header"
+                      "nav nav"
+                      "hero hero"
+                      "content content"`}
       {...inspectorProps({ fieldId: 'heroBannerImage' })}>
-      <StyledBox
-        gridColumnStart={2}
-        zIndex={0}
-        gridArea={{ base: '1 / 1 / 2 / 2' }}
-        maxHeight={{ base: '50vh', lg: '80vh' }}>
-        {heroBannerImage?.url && (
-          <CtfImage
-            imageProps={{
-              sizes: '100vw',
-            }}
-            {...heroBannerImage}
-          />
-        )}
-      </StyledBox>
-
-      <Flex
-        flexDirection="column"
-        zIndex={1}
-        gridArea={{ base: '1 / 1 / 2 / 2' }}
-        overflow="hidden"
-        justifyContent="flex-end"
-        maxHeight={{ base: '50vh', lg: '80vh' }}>
-        <Container ref={containerRef}>
-          <motion.div
-            initial={false}
-            animate={{
-              opacity: headingVisible ? 1 : 0,
-            }}>
-            <Heading
-              {...inspectorProps({ fieldId: 'heroBannerHeadline' })}
-              ref={headingRef}
-              as="h1"
-              letterSpacing="-0.11em"
-              color={heroBannerHeadlineColor || 'white'}
-              transform="translateY(0.33em)"
-              whiteSpace="nowrap">
-              {/* Tutorial: contentful-and-the-starter-template.md
-              {/* Uncomment the line below to render the Greeting field value */}
-              {/* {greeting} {' '} */}
-              {heroBannerHeadline}
-            </Heading>
-          </motion.div>
-        </Container>
-      </Flex>
+      <GridItem area={'nav'}>
+        <Nav />
+      </GridItem>
+      {hero && (
+        <StyledGridItem area={'hero'} zIndex={0}>
+          {hero.image && hero.image.url && <CtfImage {...hero.image} />}
+          <Box css={{ position: 'absolute', top: '50%', left: '20%' }}>
+            <Box css={{ paddingTop: '20px', paddingBottom: '20px' }}>
+              <Text>{hero?.preHeadline}</Text>
+            </Box>
+            <Box css={{ paddingTop: '10px', paddingBottom: '10px' }}>
+              <Heading as="h1">{hero?.headline}</Heading>
+            </Box>
+            <Box css={{ paddingTop: '20px', paddingBottom: '20px' }}>
+              <Text>{hero?.description}</Text>
+            </Box>
+            <Box css={{ paddingTop: '20px', paddingBottom: '20px' }}>
+              <Button colorScheme="green" size="lg">
+                {hero?.cta}
+              </Button>
+            </Box>
+          </Box>
+        </StyledGridItem>
+      )}
     </Grid>
   );
 };

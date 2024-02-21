@@ -92,7 +92,7 @@ input AssetFilter {
 type AssetLinkingCollections {
   componentSeoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentSeoCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageLandingCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingCollection
+  heroCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): HeroCollection
   pageProductCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageProductCollection
 }
 
@@ -120,7 +120,7 @@ enum AssetOrder {
 }
 
 """
-To have SEO-related properties in the pages we render [See type definition](https://app.contentful.com/spaces/a67phq2m6waq/content_types/componentSeo)
+To have SEO-related properties in the pages we render [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/componentSeo)
 """
 type ComponentSeo implements Entry {
   canonicalUrl(locale: String): String
@@ -186,8 +186,40 @@ input ComponentSeoFilter {
 
 type ComponentSeoLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageLandingCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingCollection
-  pageProductCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageProductCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+  pageProductCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageProductCollectionOrder], preview: Boolean, skip: Int = 0): PageProductCollection
+}
+
+enum ComponentSeoLinkingCollectionsPageLandingCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum ComponentSeoLinkingCollectionsPageProductCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum ComponentSeoOrder {
@@ -268,6 +300,86 @@ input EntryFilter {
 }
 
 enum EntryOrder {
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/hero)
+"""
+type Hero implements Entry {
+  contentfulMetadata: ContentfulMetadata!
+  cta(locale: String): String
+  description(locale: String): String
+  headline(locale: String): String
+  image(locale: String, preview: Boolean): Asset
+  linkedFrom(allowedLocales: [String]): HeroLinkingCollections
+  preHeadline(locale: String): String
+  sys: Sys!
+}
+
+type HeroCollection {
+  items: [Hero]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input HeroFilter {
+  AND: [HeroFilter]
+  OR: [HeroFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  cta: String
+  cta_contains: String
+  cta_exists: Boolean
+  cta_in: [String]
+  cta_not: String
+  cta_not_contains: String
+  cta_not_in: [String]
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  headline: String
+  headline_contains: String
+  headline_exists: Boolean
+  headline_in: [String]
+  headline_not: String
+  headline_not_contains: String
+  headline_not_in: [String]
+  image_exists: Boolean
+  preHeadline: String
+  preHeadline_contains: String
+  preHeadline_exists: Boolean
+  preHeadline_in: [String]
+  preHeadline_not: String
+  preHeadline_not_contains: String
+  preHeadline_not_in: [String]
+  sys: SysFilter
+}
+
+type HeroLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum HeroOrder {
+  cta_ASC
+  cta_DESC
+  description_ASC
+  description_DESC
+  headline_ASC
+  headline_DESC
+  preHeadline_ASC
+  preHeadline_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -410,17 +522,20 @@ input ImageTransformOptions {
 }
 
 """
-To have an entry point for the app [See type definition](https://app.contentful.com/spaces/a67phq2m6waq/content_types/pageLanding)
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+To have an entry point for the app [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/pageLanding)
 """
 type PageLanding implements Entry {
   contentfulMetadata: ContentfulMetadata!
-  heroBannerHeadline(locale: String): String
-  heroBannerHeadlineColor(locale: String): String
-  heroBannerImage(locale: String, preview: Boolean): Asset
+  heroBanner(locale: String, preview: Boolean, where: VariationContainerFilter): VariationContainer
   internalName(locale: String): String
   linkedFrom(allowedLocales: [String]): PageLandingLinkingCollections
-  productsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingProductsCollection
-  seoFields(locale: String, preview: Boolean): ComponentSeo
+  productsCollection(limit: Int = 100, locale: String, order: [PageLandingProductsCollectionOrder], preview: Boolean, skip: Int = 0, where: PageProductFilter): PageLandingProductsCollection
+  seoFields(locale: String, preview: Boolean, where: ComponentSeoFilter): ComponentSeo
   sys: Sys!
 }
 
@@ -435,21 +550,8 @@ input PageLandingFilter {
   AND: [PageLandingFilter]
   OR: [PageLandingFilter]
   contentfulMetadata: ContentfulMetadataFilter
-  heroBannerHeadline: String
-  heroBannerHeadlineColor: String
-  heroBannerHeadlineColor_contains: String
-  heroBannerHeadlineColor_exists: Boolean
-  heroBannerHeadlineColor_in: [String]
-  heroBannerHeadlineColor_not: String
-  heroBannerHeadlineColor_not_contains: String
-  heroBannerHeadlineColor_not_in: [String]
-  heroBannerHeadline_contains: String
-  heroBannerHeadline_exists: Boolean
-  heroBannerHeadline_in: [String]
-  heroBannerHeadline_not: String
-  heroBannerHeadline_not_contains: String
-  heroBannerHeadline_not_in: [String]
-  heroBannerImage_exists: Boolean
+  heroBanner: cfVariationContainerNestedFilter
+  heroBanner_exists: Boolean
   internalName: String
   internalName_contains: String
   internalName_exists: Boolean
@@ -469,10 +571,6 @@ type PageLandingLinkingCollections {
 }
 
 enum PageLandingOrder {
-  heroBannerHeadlineColor_ASC
-  heroBannerHeadlineColor_DESC
-  heroBannerHeadline_ASC
-  heroBannerHeadline_DESC
   internalName_ASC
   internalName_DESC
   sys_firstPublishedAt_ASC
@@ -492,8 +590,27 @@ type PageLandingProductsCollection {
   total: Int!
 }
 
+enum PageLandingProductsCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
 """
-To output data for a single product [See type definition](https://app.contentful.com/spaces/a67phq2m6waq/content_types/pageProduct)
+To output data for a single product [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/pageProduct)
 """
 type PageProduct implements Entry {
   contentfulMetadata: ContentfulMetadata!
@@ -504,8 +621,8 @@ type PageProduct implements Entry {
   name(locale: String): String
   price(locale: String): Float
   productImagesCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): AssetCollection
-  relatedProductsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageProductRelatedProductsCollection
-  seoFields(locale: String, preview: Boolean): ComponentSeo
+  relatedProductsCollection(limit: Int = 100, locale: String, order: [PageProductRelatedProductsCollectionOrder], preview: Boolean, skip: Int = 0, where: PageProductFilter): PageProductRelatedProductsCollection
+  seoFields(locale: String, preview: Boolean, where: ComponentSeoFilter): ComponentSeo
   slug(locale: String): String
   sys: Sys!
 }
@@ -569,8 +686,40 @@ input PageProductFilter {
 
 type PageProductLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageLandingCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingCollection
-  pageProductCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageProductCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [PageProductLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+  pageProductCollection(limit: Int = 100, locale: String, order: [PageProductLinkingCollectionsPageProductCollectionOrder], preview: Boolean, skip: Int = 0): PageProductCollection
+}
+
+enum PageProductLinkingCollectionsPageLandingCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum PageProductLinkingCollectionsPageProductCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum PageProductOrder {
@@ -599,21 +748,45 @@ type PageProductRelatedProductsCollection {
   total: Int!
 }
 
+enum PageProductRelatedProductsCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
 """
 The 'Quality' type represents quality as whole numeric values between `1` and `100`.
 """
 scalar Quality
 
 type Query {
+  _node(id: ID!, locale: String, preview: Boolean): _Node
   asset(id: String!, locale: String, preview: Boolean): Asset
   assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
   componentSeo(id: String!, locale: String, preview: Boolean): ComponentSeo
   componentSeoCollection(limit: Int = 100, locale: String, order: [ComponentSeoOrder], preview: Boolean, skip: Int = 0, where: ComponentSeoFilter): ComponentSeoCollection
   entryCollection(limit: Int = 100, locale: String, order: [EntryOrder], preview: Boolean, skip: Int = 0, where: EntryFilter): EntryCollection
+  hero(id: String!, locale: String, preview: Boolean): Hero
+  heroCollection(limit: Int = 100, locale: String, order: [HeroOrder], preview: Boolean, skip: Int = 0, where: HeroFilter): HeroCollection
   pageLanding(id: String!, locale: String, preview: Boolean): PageLanding
   pageLandingCollection(limit: Int = 100, locale: String, order: [PageLandingOrder], preview: Boolean, skip: Int = 0, where: PageLandingFilter): PageLandingCollection
   pageProduct(id: String!, locale: String, preview: Boolean): PageProduct
   pageProductCollection(limit: Int = 100, locale: String, order: [PageProductOrder], preview: Boolean, skip: Int = 0, where: PageProductFilter): PageProductCollection
+  variationContainer(id: String!, locale: String, preview: Boolean): VariationContainer
+  variationContainerCollection(limit: Int = 100, locale: String, order: [VariationContainerOrder], preview: Boolean, skip: Int = 0, where: VariationContainerFilter): VariationContainerCollection
 }
 
 type Sys {
@@ -660,6 +833,85 @@ input SysFilter {
   publishedVersion_lte: Float
   publishedVersion_not: Float
   publishedVersion_not_in: [Float]
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variationContainer)
+"""
+type VariationContainer implements Entry {
+  contentfulMetadata: ContentfulMetadata!
+  experiment(locale: String): JSON
+  experimentId(locale: String): String
+  linkedFrom(allowedLocales: [String]): VariationContainerLinkingCollections
+  meta(locale: String): JSON
+  sys: Sys!
+  variationsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): VariationContainerVariationsCollection
+}
+
+type VariationContainerCollection {
+  items: [VariationContainer]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input VariationContainerFilter {
+  AND: [VariationContainerFilter]
+  OR: [VariationContainerFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  experimentId: String
+  experimentId_contains: String
+  experimentId_exists: Boolean
+  experimentId_in: [String]
+  experimentId_not: String
+  experimentId_not_contains: String
+  experimentId_not_in: [String]
+  experiment_exists: Boolean
+  meta_exists: Boolean
+  sys: SysFilter
+  variationsCollection_exists: Boolean
+}
+
+type VariationContainerLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [VariationContainerLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+}
+
+enum VariationContainerLinkingCollectionsPageLandingCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum VariationContainerOrder {
+  experimentId_ASC
+  experimentId_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type VariationContainerVariationsCollection {
+  items: [Entry]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+interface _Node {
+  _id: ID!
 }
 
 input cfComponentSeoNestedFilter {
@@ -750,4 +1002,21 @@ input cfPageProductNestedFilter {
   slug_not_contains: String
   slug_not_in: [String]
   sys: SysFilter
+}
+
+input cfVariationContainerNestedFilter {
+  AND: [cfVariationContainerNestedFilter]
+  OR: [cfVariationContainerNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  experimentId: String
+  experimentId_contains: String
+  experimentId_exists: Boolean
+  experimentId_in: [String]
+  experimentId_not: String
+  experimentId_not_contains: String
+  experimentId_not_in: [String]
+  experiment_exists: Boolean
+  meta_exists: Boolean
+  sys: SysFilter
+  variationsCollection_exists: Boolean
 }
