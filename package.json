@@ -11,7 +11,7 @@
     "predev": "yarn generate-theme-typings",
     "prebuild": "yarn generate-theme-typings",
     "prepare": "husky install",
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

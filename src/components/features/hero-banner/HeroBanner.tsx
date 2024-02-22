@@ -28,17 +28,11 @@ export const HeroBanner = ({
   sys: { id: entryId },
 }: PageLandingFieldsFragment) => {
   const inspectorProps = useContentfulInspectorMode({ entryId });
-  const { demoExperimentMode, experimentVariant } = useContext(ExperimentContext);
+  const { demoExperimentMode, experimentVariant, userId } = useContext(ExperimentContext);
   const [hero, setHero] = useState<Hero | null>(null);
 
   useEffect(() => {
     const matchExperimentData = async () => {
-      const userId = demoExperimentMode
-        ? experimentVariant === 'control'
-          ? 'heather.lee@amplitude.com'
-          : 'anotheruser@amplitude.com'
-        : 'heather.lee@amplitude.com';
-
       await experiment.fetch({
         user_id: userId,
       });
@@ -54,7 +48,7 @@ export const HeroBanner = ({
       }
     };
     matchExperimentData();
-  }, [heroBanner, demoExperimentMode, experimentVariant]);
+  }, [heroBanner, userId]);
 
   return (
     <Grid

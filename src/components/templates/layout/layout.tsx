@@ -12,7 +12,7 @@ interface LayoutPropsInterface {
   children: ReactNode;
 }
 
-export const experiment = Experiment.initialize(`${process.env.CONTENTFUL_ACCESS_TOKEN || ''}`, {
+export const experiment = Experiment.initialize(process.env.NEXT_PUBLIC_AMPLITUDE_EXPERIMENT_CLIENT_KEY || "", {
   debug: true,
 });
 

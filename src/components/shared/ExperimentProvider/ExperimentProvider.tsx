@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useMemo } from 'react';
 
 interface ExperimentContextProps {
   demoExperimentMode: boolean;
@@ -19,8 +19,17 @@ export const ExperimentContext = createContext<ExperimentContextProps>({
 export const ExperimentProvider = ({ children }: { children: React.ReactElement | React.ReactElement[] }) => {
   const [demoExperimentMode, setDemoExperimentMode] = useState(false);
   const [experimentVariant, setExperimentVariant] = useState<string>('control');
+
+  const userId = useMemo(() => {
+     return demoExperimentMode
+    ? experimentVariant === 'control'
+      ? 'control@amplitude.com'
+      : 'treatment@amplitude.com'
+    : 'control@amplitude.com';
+  }, [demoExperimentMode, experimentVariant]);
+
   return (
-    <ExperimentContext.Provider value={{ demoExperimentMode, setDemoExperimentMode, experimentVariant, setExperimentVariant }}>
+    <ExperimentContext.Provider value={{ demoExperimentMode, setDemoExperimentMode, experimentVariant, setExperimentVariant, userId }}>
       {children}
     </ExperimentContext.Provider>
   );

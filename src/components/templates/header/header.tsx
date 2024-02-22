@@ -21,7 +21,7 @@ export const HEADER_HEIGHT = 70;
 
 export const Header = (props: BoxProps) => {
   const { t } = useTranslation();
-  const { demoExperimentMode, setDemoExperimentMode, setExperimentVariant } =
+  const { demoExperimentMode, setDemoExperimentMode, setExperimentVariant, userId } =
     useContext(ExperimentContext);
 
   return (
@@ -84,6 +84,10 @@ export const Header = (props: BoxProps) => {
             </Radio>
           </Stack>
         </RadioGroup>
+      </Box>
+
+      <Box>
+        <Text css={{ color: "#fff" }}>Currently signed in user: {userId}</Text>
       </Box>
     </Flex>
   );
