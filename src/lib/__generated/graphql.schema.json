@@ -3294,7 +3294,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "VariationContainer",
+            "name": "VariantContainer",
             "ofType": null
           }
         ]
@@ -4806,7 +4806,7 @@
                 "description": null,
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "VariationContainerFilter",
+                  "name": "VariantContainerFilter",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -4816,7 +4816,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "VariationContainer",
+              "name": "VariantContainer",
               "ofType": null
             },
             "isDeprecated": false,
@@ -5176,7 +5176,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "cfVariationContainerNestedFilter",
+              "name": "cfVariantContainerNestedFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -8387,7 +8387,7 @@
             "deprecationReason": null
           },
           {
-            "name": "variationContainer",
+            "name": "variantContainer",
             "description": null,
             "args": [
               {
@@ -8433,14 +8433,14 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "VariationContainer",
+              "name": "VariantContainer",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "variationContainerCollection",
+            "name": "variantContainerCollection",
             "description": null,
             "args": [
               {
@@ -8475,7 +8475,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "ENUM",
-                    "name": "VariationContainerOrder",
+                    "name": "VariantContainerOrder",
                     "ofType": null
                   }
                 },
@@ -8512,7 +8512,7 @@
                 "description": null,
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "VariationContainerFilter",
+                  "name": "VariantContainerFilter",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -8522,7 +8522,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "VariationContainerCollection",
+              "name": "VariantContainerCollection",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9092,8 +9092,8 @@
       },
       {
         "kind": "OBJECT",
-        "name": "VariationContainer",
-        "description": "[See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variationContainer)",
+        "name": "VariantContainer",
+        "description": "[See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variantContainer)",
         "fields": [
           {
             "name": "contentfulMetadata",
@@ -9184,7 +9184,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "VariationContainerLinkingCollections",
+              "name": "VariantContainerLinkingCollections",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9232,7 +9232,7 @@
             "deprecationReason": null
           },
           {
-            "name": "variationsCollection",
+            "name": "variantsCollection",
             "description": null,
             "args": [
               {
@@ -9286,7 +9286,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "VariationContainerVariationsCollection",
+              "name": "VariantContainerVariantsCollection",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9306,7 +9306,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "VariationContainerCollection",
+        "name": "VariantContainerCollection",
         "description": null,
         "fields": [
           {
@@ -9321,7 +9321,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "VariationContainer",
+                  "name": "VariantContainer",
                   "ofType": null
                 }
               }
@@ -9385,7 +9385,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "VariationContainerFilter",
+        "name": "VariantContainerFilter",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -9397,7 +9397,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "VariationContainerFilter",
+                "name": "VariantContainerFilter",
                 "ofType": null
               }
             },
@@ -9413,7 +9413,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "VariationContainerFilter",
+                "name": "VariantContainerFilter",
                 "ofType": null
               }
             },
@@ -9562,7 +9562,7 @@
             "deprecationReason": null
           },
           {
-            "name": "variationsCollection_exists",
+            "name": "variantsCollection_exists",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -9580,7 +9580,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "VariationContainerLinkingCollections",
+        "name": "VariantContainerLinkingCollections",
         "description": null,
         "fields": [
           {
@@ -9680,7 +9680,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "ENUM",
-                    "name": "VariationContainerLinkingCollectionsPageLandingCollectionOrder",
+                    "name": "VariantContainerLinkingCollectionsPageLandingCollectionOrder",
                     "ofType": null
                   }
                 },
@@ -9729,7 +9729,7 @@
       },
       {
         "kind": "ENUM",
-        "name": "VariationContainerLinkingCollectionsPageLandingCollectionOrder",
+        "name": "VariantContainerLinkingCollectionsPageLandingCollectionOrder",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -9800,7 +9800,7 @@
       },
       {
         "kind": "ENUM",
-        "name": "VariationContainerOrder",
+        "name": "VariantContainerOrder",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -9871,7 +9871,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "VariationContainerVariationsCollection",
+        "name": "VariantContainerVariantsCollection",
         "description": null,
         "fields": [
           {
@@ -12002,7 +12002,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "cfVariationContainerNestedFilter",
+        "name": "cfVariantContainerNestedFilter",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -12014,7 +12014,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "cfVariationContainerNestedFilter",
+                "name": "cfVariantContainerNestedFilter",
                 "ofType": null
               }
             },
@@ -12030,7 +12030,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "cfVariationContainerNestedFilter",
+                "name": "cfVariantContainerNestedFilter",
                 "ofType": null
               }
             },
@@ -12179,7 +12179,7 @@
             "deprecationReason": null
           },
           {
-            "name": "variationsCollection_exists",
+            "name": "variantsCollection_exists",
             "description": null,
             "type": {
               "kind": "SCALAR",

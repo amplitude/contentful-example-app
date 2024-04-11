@@ -13,7 +13,7 @@ fragment PageLandingFields on PageLanding {
     experiment
     experimentId
     meta
-    variationsCollection {
+    variantsCollection {
       items {
         ...HeroFields
       }

@@ -715,7 +715,7 @@ export type ImageTransformOptions = {
 export type PageLanding = Entry & {
   __typename?: 'PageLanding';
   contentfulMetadata: ContentfulMetadata;
-  heroBanner?: Maybe<VariationContainer>;
+  heroBanner?: Maybe<VariantContainer>;
   internalName?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageLandingLinkingCollections>;
   productsCollection?: Maybe<PageLandingProductsCollection>;
@@ -728,7 +728,7 @@ export type PageLanding = Entry & {
 export type PageLandingHeroBannerArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
-  where?: InputMaybe<VariationContainerFilter>;
+  where?: InputMaybe<VariantContainerFilter>;
 };
 
 
@@ -774,7 +774,7 @@ export type PageLandingFilter = {
   AND?: InputMaybe<Array<InputMaybe<PageLandingFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageLandingFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  heroBanner?: InputMaybe<CfVariationContainerNestedFilter>;
+  heroBanner?: InputMaybe<CfVariantContainerNestedFilter>;
   heroBanner_exists?: InputMaybe<Scalars['Boolean']>;
   internalName?: InputMaybe<Scalars['String']>;
   internalName_contains?: InputMaybe<Scalars['String']>;
@@ -1114,8 +1114,8 @@ export type Query = {
   pageLandingCollection?: Maybe<PageLandingCollection>;
   pageProduct?: Maybe<PageProduct>;
   pageProductCollection?: Maybe<PageProductCollection>;
-  variationContainer?: Maybe<VariationContainer>;
-  variationContainerCollection?: Maybe<VariationContainerCollection>;
+  variantContainer?: Maybe<VariantContainer>;
+  variantContainerCollection?: Maybe<VariantContainerCollection>;
 };
 
 
@@ -1221,20 +1221,20 @@ export type QueryPageProductCollectionArgs = {
 };
 
 
-export type QueryVariationContainerArgs = {
+export type QueryVariantContainerArgs = {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
 };
 
 
-export type QueryVariationContainerCollectionArgs = {
+export type QueryVariantContainerCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<Array<InputMaybe<VariationContainerOrder>>>;
+  order?: InputMaybe<Array<InputMaybe<VariantContainerOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<VariationContainerFilter>;
+  where?: InputMaybe<VariantContainerFilter>;
 };
 
 export type Sys = {
@@ -1284,62 +1284,62 @@ export type SysFilter = {
   publishedVersion_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 };
 
-/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variationContainer) */
-export type VariationContainer = Entry & {
-  __typename?: 'VariationContainer';
+/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variantContainer) */
+export type VariantContainer = Entry & {
+  __typename?: 'VariantContainer';
   contentfulMetadata: ContentfulMetadata;
   experiment?: Maybe<Scalars['JSON']>;
   experimentId?: Maybe<Scalars['String']>;
-  linkedFrom?: Maybe<VariationContainerLinkingCollections>;
+  linkedFrom?: Maybe<VariantContainerLinkingCollections>;
   meta?: Maybe<Scalars['JSON']>;
   sys: Sys;
-  variationsCollection?: Maybe<VariationContainerVariationsCollection>;
+  variantsCollection?: Maybe<VariantContainerVariantsCollection>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variationContainer) */
-export type VariationContainerExperimentArgs = {
+/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variantContainer) */
+export type VariantContainerExperimentArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variationContainer) */
-export type VariationContainerExperimentIdArgs = {
+/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variantContainer) */
+export type VariantContainerExperimentIdArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variationContainer) */
-export type VariationContainerLinkedFromArgs = {
+/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variantContainer) */
+export type VariantContainerLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variationContainer) */
-export type VariationContainerMetaArgs = {
+/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variantContainer) */
+export type VariantContainerMetaArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variationContainer) */
-export type VariationContainerVariationsCollectionArgs = {
+/** [See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variantContainer) */
+export type VariantContainerVariantsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
-export type VariationContainerCollection = {
-  __typename?: 'VariationContainerCollection';
-  items: Array<Maybe<VariationContainer>>;
+export type VariantContainerCollection = {
+  __typename?: 'VariantContainerCollection';
+  items: Array<Maybe<VariantContainer>>;
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
 };
 
-export type VariationContainerFilter = {
-  AND?: InputMaybe<Array<InputMaybe<VariationContainerFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<VariationContainerFilter>>>;
+export type VariantContainerFilter = {
+  AND?: InputMaybe<Array<InputMaybe<VariantContainerFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<VariantContainerFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   experimentId?: InputMaybe<Scalars['String']>;
   experimentId_contains?: InputMaybe<Scalars['String']>;
@@ -1351,17 +1351,17 @@ export type VariationContainerFilter = {
   experiment_exists?: InputMaybe<Scalars['Boolean']>;
   meta_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
-  variationsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  variantsCollection_exists?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type VariationContainerLinkingCollections = {
-  __typename?: 'VariationContainerLinkingCollections';
+export type VariantContainerLinkingCollections = {
+  __typename?: 'VariantContainerLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
   pageLandingCollection?: Maybe<PageLandingCollection>;
 };
 
 
-export type VariationContainerLinkingCollectionsEntryCollectionArgs = {
+export type VariantContainerLinkingCollectionsEntryCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -1369,15 +1369,15 @@ export type VariationContainerLinkingCollectionsEntryCollectionArgs = {
 };
 
 
-export type VariationContainerLinkingCollectionsPageLandingCollectionArgs = {
+export type VariantContainerLinkingCollectionsPageLandingCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<Array<InputMaybe<VariationContainerLinkingCollectionsPageLandingCollectionOrder>>>;
+  order?: InputMaybe<Array<InputMaybe<VariantContainerLinkingCollectionsPageLandingCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
-export enum VariationContainerLinkingCollectionsPageLandingCollectionOrder {
+export enum VariantContainerLinkingCollectionsPageLandingCollectionOrder {
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -1390,7 +1390,7 @@ export enum VariationContainerLinkingCollectionsPageLandingCollectionOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-export enum VariationContainerOrder {
+export enum VariantContainerOrder {
   ExperimentIdAsc = 'experimentId_ASC',
   ExperimentIdDesc = 'experimentId_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -1403,8 +1403,8 @@ export enum VariationContainerOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-export type VariationContainerVariationsCollection = {
-  __typename?: 'VariationContainerVariationsCollection';
+export type VariantContainerVariantsCollection = {
+  __typename?: 'VariantContainerVariantsCollection';
   items: Array<Maybe<Entry>>;
   limit: Scalars['Int'];
   skip: Scalars['Int'];
@@ -1505,9 +1505,9 @@ export type CfPageProductNestedFilter = {
   sys?: InputMaybe<SysFilter>;
 };
 
-export type CfVariationContainerNestedFilter = {
-  AND?: InputMaybe<Array<InputMaybe<CfVariationContainerNestedFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<CfVariationContainerNestedFilter>>>;
+export type CfVariantContainerNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfVariantContainerNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfVariantContainerNestedFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   experimentId?: InputMaybe<Scalars['String']>;
   experimentId_contains?: InputMaybe<Scalars['String']>;
@@ -1519,7 +1519,7 @@ export type CfVariationContainerNestedFilter = {
   experiment_exists?: InputMaybe<Scalars['Boolean']>;
   meta_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
-  variationsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  variantsCollection_exists?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type HeroCollectionQueryVariables = Exact<{
@@ -1555,10 +1555,10 @@ export type ImageFieldsFragment = { __typename: 'Asset', title?: string | null, 
 export type PageLandingFieldsFragment = { __typename: 'PageLanding', internalName?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, seoFields?: (
     { __typename?: 'ComponentSeo' }
     & SeoFieldsFragment
-  ) | null, heroBanner?: { __typename: 'VariationContainer', experiment?: any | null, experimentId?: string | null, meta?: any | null, variationsCollection?: { __typename?: 'VariationContainerVariationsCollection', items: Array<{ __typename?: 'ComponentSeo' } | (
+  ) | null, heroBanner?: { __typename: 'VariantContainer', experiment?: any | null, experimentId?: string | null, meta?: any | null, variantsCollection?: { __typename?: 'VariantContainerVariantsCollection', items: Array<{ __typename?: 'ComponentSeo' } | (
         { __typename?: 'Hero' }
         & HeroFieldsFragment
-      ) | { __typename?: 'PageLanding' } | { __typename?: 'PageProduct' } | { __typename?: 'VariationContainer' } | null> } | null } | null, productsCollection?: { __typename?: 'PageLandingProductsCollection', items: Array<(
+      ) | { __typename?: 'PageLanding' } | { __typename?: 'PageProduct' } | { __typename?: 'VariantContainer' } | null> } | null } | null, productsCollection?: { __typename?: 'PageLandingProductsCollection', items: Array<(
       { __typename?: 'PageProduct' }
       & PageProductFieldsFragment
     ) | null> } | null };
@@ -1740,7 +1740,7 @@ export const PageLandingFieldsFragmentDoc = gql`
     experiment
     experimentId
     meta
-    variationsCollection {
+    variantsCollection {
       items {
         ...HeroFields
       }

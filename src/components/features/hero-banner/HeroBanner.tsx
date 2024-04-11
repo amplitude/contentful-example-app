@@ -41,7 +41,7 @@ export const HeroBanner = ({
       let resolvedVariant;
       if (heroBanner && variant.value) {
         const variation = heroBanner.meta[variant.value];
-        resolvedVariant = heroBanner.variationsCollection?.items.find(hero => {
+        resolvedVariant = heroBanner.variantsCollection?.items.find(hero => {
           return hero?.__typename === 'Hero' && hero?.sys.id === variation;
         });
         setHero(resolvedVariant);

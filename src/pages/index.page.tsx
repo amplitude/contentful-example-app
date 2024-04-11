@@ -10,6 +10,7 @@ import { client, previewClient } from '@src/lib/client';
 import { getServerSideTranslations } from '@src/pages/utils/get-serverside-translations';
 
 const Page = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log(props.page);
   const { t } = useTranslation();
   const page = useContentfulLiveUpdates(props.page);
 

@@ -531,7 +531,7 @@ To have an entry point for the app [See type definition](https://app.contentful.
 """
 type PageLanding implements Entry {
   contentfulMetadata: ContentfulMetadata!
-  heroBanner(locale: String, preview: Boolean, where: VariationContainerFilter): VariationContainer
+  heroBanner(locale: String, preview: Boolean, where: VariantContainerFilter): VariantContainer
   internalName(locale: String): String
   linkedFrom(allowedLocales: [String]): PageLandingLinkingCollections
   productsCollection(limit: Int = 100, locale: String, order: [PageLandingProductsCollectionOrder], preview: Boolean, skip: Int = 0, where: PageProductFilter): PageLandingProductsCollection
@@ -550,7 +550,7 @@ input PageLandingFilter {
   AND: [PageLandingFilter]
   OR: [PageLandingFilter]
   contentfulMetadata: ContentfulMetadataFilter
-  heroBanner: cfVariationContainerNestedFilter
+  heroBanner: cfVariantContainerNestedFilter
   heroBanner_exists: Boolean
   internalName: String
   internalName_contains: String
@@ -785,8 +785,8 @@ type Query {
   pageLandingCollection(limit: Int = 100, locale: String, order: [PageLandingOrder], preview: Boolean, skip: Int = 0, where: PageLandingFilter): PageLandingCollection
   pageProduct(id: String!, locale: String, preview: Boolean): PageProduct
   pageProductCollection(limit: Int = 100, locale: String, order: [PageProductOrder], preview: Boolean, skip: Int = 0, where: PageProductFilter): PageProductCollection
-  variationContainer(id: String!, locale: String, preview: Boolean): VariationContainer
-  variationContainerCollection(limit: Int = 100, locale: String, order: [VariationContainerOrder], preview: Boolean, skip: Int = 0, where: VariationContainerFilter): VariationContainerCollection
+  variantContainer(id: String!, locale: String, preview: Boolean): VariantContainer
+  variantContainerCollection(limit: Int = 100, locale: String, order: [VariantContainerOrder], preview: Boolean, skip: Int = 0, where: VariantContainerFilter): VariantContainerCollection
 }
 
 type Sys {
@@ -836,28 +836,28 @@ input SysFilter {
 }
 
 """
-[See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variationContainer)
+[See type definition](https://app.contentful.com/spaces/4y4crvvoco9a/content_types/variantContainer)
 """
-type VariationContainer implements Entry {
+type VariantContainer implements Entry {
   contentfulMetadata: ContentfulMetadata!
   experiment(locale: String): JSON
   experimentId(locale: String): String
-  linkedFrom(allowedLocales: [String]): VariationContainerLinkingCollections
+  linkedFrom(allowedLocales: [String]): VariantContainerLinkingCollections
   meta(locale: String): JSON
   sys: Sys!
-  variationsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): VariationContainerVariationsCollection
+  variantsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): VariantContainerVariantsCollection
 }
 
-type VariationContainerCollection {
-  items: [VariationContainer]!
+type VariantContainerCollection {
+  items: [VariantContainer]!
   limit: Int!
   skip: Int!
   total: Int!
 }
 
-input VariationContainerFilter {
-  AND: [VariationContainerFilter]
-  OR: [VariationContainerFilter]
+input VariantContainerFilter {
+  AND: [VariantContainerFilter]
+  OR: [VariantContainerFilter]
   contentfulMetadata: ContentfulMetadataFilter
   experimentId: String
   experimentId_contains: String
@@ -869,15 +869,15 @@ input VariationContainerFilter {
   experiment_exists: Boolean
   meta_exists: Boolean
   sys: SysFilter
-  variationsCollection_exists: Boolean
+  variantsCollection_exists: Boolean
 }
 
-type VariationContainerLinkingCollections {
+type VariantContainerLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageLandingCollection(limit: Int = 100, locale: String, order: [VariationContainerLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [VariantContainerLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
 }
 
-enum VariationContainerLinkingCollectionsPageLandingCollectionOrder {
+enum VariantContainerLinkingCollectionsPageLandingCollectionOrder {
   internalName_ASC
   internalName_DESC
   sys_firstPublishedAt_ASC
@@ -890,7 +890,7 @@ enum VariationContainerLinkingCollectionsPageLandingCollectionOrder {
   sys_publishedVersion_DESC
 }
 
-enum VariationContainerOrder {
+enum VariantContainerOrder {
   experimentId_ASC
   experimentId_DESC
   sys_firstPublishedAt_ASC
@@ -903,7 +903,7 @@ enum VariationContainerOrder {
   sys_publishedVersion_DESC
 }
 
-type VariationContainerVariationsCollection {
+type VariantContainerVariantsCollection {
   items: [Entry]!
   limit: Int!
   skip: Int!
@@ -1004,9 +1004,9 @@ input cfPageProductNestedFilter {
   sys: SysFilter
 }
 
-input cfVariationContainerNestedFilter {
-  AND: [cfVariationContainerNestedFilter]
-  OR: [cfVariationContainerNestedFilter]
+input cfVariantContainerNestedFilter {
+  AND: [cfVariantContainerNestedFilter]
+  OR: [cfVariantContainerNestedFilter]
   contentfulMetadata: ContentfulMetadataFilter
   experimentId: String
   experimentId_contains: String
@@ -1018,5 +1018,5 @@ input cfVariationContainerNestedFilter {
   experiment_exists: Boolean
   meta_exists: Boolean
   sys: SysFilter
-  variationsCollection_exists: Boolean
+  variantsCollection_exists: Boolean
 }
