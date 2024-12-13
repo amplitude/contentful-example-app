@@ -41,6 +41,7 @@ export const Header = (props: BoxProps) => {
         w="144px">
         <Link href="/" title={t('common.homepage')}>
           <Image
+            alt="amp-logo"
             src={
               'https://amplistore.wpengine.com/wp-content/themes/amplistore-dist/assets/images/amplitude-logo-white.jpg'
             }

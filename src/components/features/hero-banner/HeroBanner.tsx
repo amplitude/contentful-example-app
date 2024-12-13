@@ -1,8 +1,7 @@
 import { Box, Grid, GridItem, Heading, Button, Text } from '@chakra-ui/react';
 import { useContentfulInspectorMode } from '@contentful/live-preview/react';
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
-import { useEffect, useRef, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import { CtfImage } from '../contentful/ctf-image';
 
@@ -28,7 +27,7 @@ export const HeroBanner = ({
   sys: { id: entryId },
 }: PageLandingFieldsFragment) => {
   const inspectorProps = useContentfulInspectorMode({ entryId });
-  const { demoExperimentMode, experimentVariant, userId } = useContext(ExperimentContext);
+  const { userId } = useContext(ExperimentContext);
   const [hero, setHero] = useState<Hero | null>(null);
 
   useEffect(() => {
@@ -65,7 +64,7 @@ export const HeroBanner = ({
       </GridItem>
       {hero && (
         <StyledGridItem area={'hero'} zIndex={0}>
-          {hero.image && hero.image.url && <CtfImage {...hero.image} />}
+          {hero.image && hero.image.url && <CtfImage {...hero.image} __typename="Asset" />}
           <Box css={{ position: 'absolute', top: '50%', left: '20%' }}>
             <Box css={{ paddingTop: '20px', paddingBottom: '20px' }}>
               <Text>{hero?.preHeadline}</Text>
